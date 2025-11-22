@@ -1,0 +1,139 @@
+name: Benchmark Suite
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      subset:
+        description: 'Benchmark subset (smoke/full)'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - full
+  
+  # Scheduled run (weekly on Sunday at 2 AM)
+  schedule:
+    - cron: '0 2 * * 0'
+  
+  # Run on pull requests that touch benchmark code
+  pull_request:
+    paths:
+      - 'src/pdf_reader/**'
+      - 'tests/**'
+      - 'datasets/benchmarks/**'
+      - '.github/workflows/benchmarks.yml'
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libpoppler-cpp-dev \
+            poppler-utils
+      
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+      
+      - name: Run smoke benchmarks
+        id: smoke_benchmarks
+        run: |
+          python tools/run_benchmarks.py \
+            --dataset datasets/benchmarks \
+            --subset smoke \
+            --output benchmark_results
+        continue-on-error: true
+      
+      - name: Run full benchmarks (if not PR)
+        id: full_benchmarks
+        if: github.event_name != 'pull_request'
+        run: |
+          python tools/run_benchmarks.py \
+            --dataset datasets/benchmarks \
+            --subset full \
+            --output benchmark_results_full
+        continue-on-error: true
+      
+      - name: Check quality gates
+        run: |
+          python tools/check_quality_gates.py \
+            --results benchmark_results/benchmark_results.json \
+            --thresholds .github/benchmark_thresholds.yaml
+      
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v3
+        with:
+          name: benchmark-results
+          path: benchmark_results/
+          retention-days: 90
+      
+      - name: Upload full benchmark results
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v3
+        with:
+          name: benchmark-results-full
+          path: benchmark_results_full/
+          retention-days: 90
+      
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('benchmark_results/benchmark_results.json', 'utf8'));
+            
+            const body = `## Benchmark Results
+            
+            | Metric | Value |
+            |--------|-------|
+            | Overall F1 | ${(results.overall_f1 * 100).toFixed(2)}% |
+            | Structural F1 | ${(results.structural_f1 * 100).toFixed(2)}% |
+            | Text F1 | ${(results.text_f1 * 100).toFixed(2)}% |
+            | Tables Detected | ${results.tables_detected} / ${results.tables_ground_truth} |
+            
+            <details>
+            <summary>Detailed Metrics</summary>
+            
+            **Detection:**
+            - Precision: ${(results.detection_precision * 100).toFixed(2)}%
+            - Recall: ${(results.detection_recall * 100).toFixed(2)}%
+            - F1: ${(results.detection_f1 * 100).toFixed(2)}%
+            
+            **Structural:**
+            - Grid Shape Accuracy: ${(results.avg_grid_shape_accuracy * 100).toFixed(2)}%
+            - Cell IoU: ${(results.avg_cell_iou * 100).toFixed(2)}%
+            - Span Accuracy: ${(results.avg_span_accuracy * 100).toFixed(2)}%
+            
+            **Text:**
+            - Character Error Rate: ${(results.avg_cer * 100).toFixed(2)}%
+            - Word Error Rate: ${(results.avg_wer * 100).toFixed(2)}%
+            - Exact Match Rate: ${(results.exact_match_rate * 100).toFixed(2)}%
+            </details>
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+

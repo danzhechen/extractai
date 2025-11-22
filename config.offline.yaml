@@ -1,0 +1,54 @@
+# Offline Preset Configuration (No API calls, FREE)
+# Uses heuristic-based detection + OCR (no LLM)
+#
+# Cost: $0 (completely offline)
+# Quality: Good for clean, bordered tables
+# Usage: python -m pdf_reader extract --input document.pdf --config config.offline.yaml
+
+# Preset
+extraction_preset: offline  # Heuristics only
+
+# Input/Output settings
+input_path: null  # Set via CLI --input argument
+# output_dir: null  # Optional output directory
+
+# Page selection
+# page_indices: null  # Process all pages (default)
+
+# Processing settings
+dpi: 200  # Rendering DPI
+default_rows: 2  # Default grid size (heuristic fallback)
+default_cols: 3
+
+# Extraction strategy (set by preset)
+extraction_strategy: heuristic  # OpenCV-based line detection + OCR
+llm_fallback_enabled: false  # No LLM calls
+enable_auto_escalation: false  # N/A for offline mode
+
+# Line detection settings (for heuristic strategy)
+enable_line_detection: true  # Use OpenCV line detection
+line_detection_min_length: 40
+line_detection_gap_tolerance: 5
+line_detection_morph_iterations: 2
+line_detection_min_separation: 5
+
+# Irregular table support (optional)
+enable_irregular_structure_detection: false  # Disable for speed
+ragged_mode: strict  # "strict" or "ragged"
+
+# Logging configuration
+log_level: INFO  # DEBUG, INFO, WARNING, ERROR
+log_file: null  # Optional log file path
+log_format: human  # "json" or "human"
+
+# Debug artifacts (recommended for tuning)
+enable_debug_artifacts: false  # Set to true to visualize detection
+debug_output_dir: debug_output
+generate_overlays: true
+generate_html_report: true
+
+# Concurrency settings
+worker_type: thread  # Parallel processing
+max_workers: null  # Auto-detect based on CPU cores
+
+

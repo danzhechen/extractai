@@ -1,0 +1,20 @@
+# Fast extraction for scanned PDFs (no confidence scoring)
+# Use when: Speed is priority, confidence not needed
+
+extraction_preset: smart
+extraction_strategy: llm_end_to_end
+
+# LLM settings - single attempt (fastest, cheapest)
+llm_model: gemini-2.5-pro  # FREE
+llm_consistency_attempts: 1  # No consensus (fastest)
+
+# Position verification - disabled for scanned PDFs
+enable_position_verification: false
+
+# Processing
+worker_type: thread  # Parallel processing
+max_workers: 2
+
+# Logging
+log_level: INFO
+

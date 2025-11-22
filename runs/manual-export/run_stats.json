@@ -1,0 +1,14 @@
+{
+  "pages_processed": 5,
+  "tables_detected": 5,
+  "tables_extracted": 5,
+  "pages_skipped": 0,
+  "tables_failed": 0,
+  "ocr_calls": 0,
+  "llm_fallback_calls": 0,
+  "total_cells_extracted": 30,
+  "average_ocr_confidence": 0.8999999999999996,
+  "llm_fallback_count": 0,
+  "total_duration_ms": 2423.1810569763184,
+  "errors": []
+}

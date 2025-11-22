@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PDF Table Extraction Report</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+h1 { color: #333; }
+h2 { color: #666; margin-top: 30px; }
+.section { background-color: white; padding: 15px; margin: 10px 0; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+table th, table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+table th { background-color: #4CAF50; color: white; }
+table tr:nth-child(even) { background-color: #f2f2f2; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.metric-item { background-color: #e8f5e9; padding: 10px; border-radius: 5px; }
+.metric-label { font-weight: bold; color: #2e7d32; }
+.metric-value { font-size: 1.2em; color: #1b5e20; }
+.page-section { margin: 20px 0; }
+.table-preview { margin: 15px 0; }
+a { color: #4CAF50; text-decoration: none; }
+a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<h1>PDF Table Extraction Report</h1>
+<p><strong>Generated:</strong> 2025-11-16 23:43:30</p>
+<p><strong>Input PDF:</strong> sample/assam-1.pdf</p>
+<div class='section'>
+<h2>Configuration</h2>
+<ul>
+<li><strong>DPI:</strong> 200</li>
+<li><strong>Page Indices:</strong> All pages</li>
+<li><strong>Default Rows:</strong> 2</li>
+<li><strong>Default Cols:</strong> 3</li>
+<li><strong>LLM Fallback:</strong> False</li>
+</ul>
+</div>
+<div class='section'>
+<h2>Run Statistics</h2>
+<div class='metrics'>
+<div class='metric-item'><span class='metric-label'>Pages Processed:</span><br><span class='metric-value'>5</span></div>
+<div class='metric-item'><span class='metric-label'>Tables Detected:</span><br><span class='metric-value'>5</span></div>
+<div class='metric-item'><span class='metric-label'>Tables Extracted:</span><br><span class='metric-value'>5</span></div>
+<div class='metric-item'><span class='metric-label'>Total Cells:</span><br><span class='metric-value'>30</span></div>
+<div class='metric-item'><span class='metric-label'>Average Confidence:</span><br><span class='metric-value'>0.90</span></div>
+<div class='metric-item'><span class='metric-label'>LLM Fallbacks:</span><br><span class='metric-value'>0</span></div>
+<div class='metric-item'><span class='metric-label'>Duration:</span><br><span class='metric-value'>129381.29 ms</span></div>
+</div>
+</div>
+<div class='section'>
+<h2>Overlay Images</h2>
+<ul>
+<li><a href='page_0_overlay.png'>page_0_overlay.png</a></li>
+<li><a href='page_1_overlay.png'>page_1_overlay.png</a></li>
+<li><a href='page_2_overlay.png'>page_2_overlay.png</a></li>
+<li><a href='page_3_overlay.png'>page_3_overlay.png</a></li>
+<li><a href='page_4_overlay.png'>page_4_overlay.png</a></li>
+</ul>
+</div>
+<div class='section'>
+<h2>Extracted Tables</h2>
+<div class='page-section'>
+<h3>Page 0</h3>
+<div class='table-preview'>
+<p><strong>Table ID:</strong> p0_t0 | 
+<strong>Cells:</strong> 6 | 
+<strong>Confidence:</strong> 0.90</p>
+<table>
+<thead><tr>
+<th>col_0</th>
+<th>col_1</th>
+<th>col_2</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>r0c0</td>
+<td>r0c1</td>
+<td>r0c2</td>
+</tr>
+<tr>
+<td>r1c0</td>
+<td>r1c1</td>
+<td>r1c2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class='page-section'>
+<h3>Page 1</h3>
+<div class='table-preview'>
+<p><strong>Table ID:</strong> p1_t0 | 
+<strong>Cells:</strong> 6 | 
+<strong>Confidence:</strong> 0.90</p>
+<table>
+<thead><tr>
+<th>col_0</th>
+<th>col_1</th>
+<th>col_2</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>r0c0</td>
+<td>r0c1</td>
+<td>r0c2</td>
+</tr>
+<tr>
+<td>r1c0</td>
+<td>r1c1</td>
+<td>r1c2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class='page-section'>
+<h3>Page 2</h3>
+<div class='table-preview'>
+<p><strong>Table ID:</strong> p2_t0 | 
+<strong>Cells:</strong> 6 | 
+<strong>Confidence:</strong> 0.90</p>
+<table>
+<thead><tr>
+<th>col_0</th>
+<th>col_1</th>
+<th>col_2</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>r0c0</td>
+<td>r0c1</td>
+<td>r0c2</td>
+</tr>
+<tr>
+<td>r1c0</td>
+<td>r1c1</td>
+<td>r1c2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class='page-section'>
+<h3>Page 3</h3>
+<div class='table-preview'>
+<p><strong>Table ID:</strong> p3_t0 | 
+<strong>Cells:</strong> 6 | 
+<strong>Confidence:</strong> 0.90</p>
+<table>
+<thead><tr>
+<th>col_0</th>
+<th>col_1</th>
+<th>col_2</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>r0c0</td>
+<td>r0c1</td>
+<td>r0c2</td>
+</tr>
+<tr>
+<td>r1c0</td>
+<td>r1c1</td>
+<td>r1c2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class='page-section'>
+<h3>Page 4</h3>
+<div class='table-preview'>
+<p><strong>Table ID:</strong> p4_t0 | 
+<strong>Cells:</strong> 6 | 
+<strong>Confidence:</strong> 0.90</p>
+<table>
+<thead><tr>
+<th>col_0</th>
+<th>col_1</th>
+<th>col_2</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>r0c0</td>
+<td>r0c1</td>
+<td>r0c2</td>
+</tr>
+<tr>
+<td>r1c0</td>
+<td>r1c1</td>
+<td>r1c2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

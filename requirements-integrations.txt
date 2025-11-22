@@ -1,0 +1,36 @@
+# Optional dependencies for integration adapters
+# Install with: pip install -r requirements.txt -r requirements-integrations.txt
+
+# ===========================
+# Airflow Integration
+# ===========================
+# apache-airflow>=2.5.0
+
+# ===========================
+# Prefect Integration
+# ===========================
+# prefect>=2.10.0
+
+# ===========================
+# HTTP Service Integration
+# ===========================
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+python-multipart>=0.0.6
+
+# Optional: Authentication and rate limiting
+# python-jose[cryptography]>=3.3.0
+# slowapi>=0.1.8
+
+# ===========================
+# Cloud Storage (Optional)
+# ===========================
+# boto3>=1.26.0  # AWS S3
+# google-cloud-storage>=2.10.0  # Google Cloud Storage
+
+# ===========================
+# Testing
+# ===========================
+httpx>=0.24.0  # For TestClient
+
+

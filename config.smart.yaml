@@ -1,0 +1,51 @@
+# Smart Preset Configuration (Recommended for most users)
+# Uses FREE Gemini 2.5 Pro with conservative escalation to 3.0 Pro
+#
+# Cost: ~$0 for typical usage (escalation rare)
+# Quality: Excellent for 95%+ of tables
+# Usage: python -m pdf_reader extract --input document.pdf --config config.smart.yaml
+
+# Preset (explicitly set for clarity)
+extraction_preset: smart  # FREE Gemini 2.5 Pro
+
+# Input/Output settings
+input_path: null  # Set via CLI --input argument
+# output_dir: null  # Optional output directory
+
+# Page selection
+# page_indices: null  # Process all pages (default)
+# page_indices: [0, 2, 4]  # Or specify pages
+
+# Processing settings
+dpi: 200  # Rendering DPI
+
+# Extraction strategy (set by preset, but can override)
+extraction_strategy: llm_end_to_end  # LLM-first approach
+llm_provider: google  # Use Google Gemini
+llm_model: gemini-2.5-pro  # FREE tier model!
+llm_model_escalation: gemini-3.0-pro  # PAID fallback (rarely used)
+enable_auto_escalation: false  # Conservative: don't auto-spend money
+
+# API key (set via environment variable for security)
+# llm_api_key: null  # Set PDF_READER_LLM_API_KEY env var instead
+
+# LLM consistency (optional)
+llm_consistency_attempts: 1  # Single attempt (faster, cheaper)
+llm_consistency_threshold: 0.8  # Consensus threshold if >1 attempts
+
+# Logging configuration
+log_level: INFO  # DEBUG, INFO, WARNING, ERROR
+log_file: null  # Optional log file path
+log_format: human  # "json" or "human"
+
+# Debug artifacts (optional)
+enable_debug_artifacts: false  # Set to true for visualization
+debug_output_dir: debug_output
+generate_overlays: true
+generate_html_report: true
+
+# Concurrency settings
+worker_type: thread  # Use threading for parallel processing
+max_workers: null  # Auto-detect based on CPU cores
+
+

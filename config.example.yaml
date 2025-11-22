@@ -1,0 +1,59 @@
+# Example configuration file for PDF table extraction pipeline
+# Copy this file and customize as needed
+#
+# Quick Start Presets:
+# - config.smart.yaml: FREE Gemini 2.5 Pro (recommended)
+# - config.premium.yaml: PAID Gemini 3.0 Pro (best quality)
+# - config.offline.yaml: Heuristics only (no API, FREE)
+
+# Extraction preset (quick config)
+extraction_preset: smart  # "smart" (FREE), "premium" (PAID), or "offline" (FREE)
+
+# Input/Output settings
+input_path: null  # Set via CLI --input argument
+# output_dir: null  # Optional output directory
+
+# Page selection
+# Process all pages by default, or specify:
+# page_indices: [0, 2, 4]  # Specific pages
+# page_indices: [0, 1, 2, 3, 4, 5]  # Or use range in CLI: --pages 0-5
+
+# Processing settings
+dpi: 200  # Rendering DPI (higher = better quality, slower)
+default_rows: 2  # Default number of rows for grid detection (heuristic mode)
+default_cols: 3  # Default number of columns for grid detection (heuristic mode)
+
+# Extraction strategy (set by preset, but can override)
+extraction_strategy: llm_end_to_end  # "heuristic" or "llm_end_to_end" (default)
+
+# LLM configuration (for llm_end_to_end strategy)
+llm_provider: google  # "google" (Gemini) or "openai" (GPT-4o)
+llm_model: gemini-2.5-pro  # FREE model (default)
+llm_model_escalation: gemini-3.0-pro  # PAID fallback for failures
+enable_auto_escalation: false  # Conservative: don't auto-spend money
+# llm_api_key: null  # Set via PDF_READER_LLM_API_KEY env var for security
+
+# LLM consistency (optional)
+llm_consistency_attempts: 1  # Number of extraction attempts (1-5)
+llm_consistency_threshold: 0.8  # Required agreement ratio (0.0-1.0)
+
+# LLM fallback for heuristic strategy (legacy)
+ocr_confidence_threshold: 0.5  # Use LLM if OCR confidence < this (0.0-1.0)
+llm_fallback_enabled: false  # Enable LLM fallback for low-confidence cells
+
+# Logging configuration
+log_level: INFO  # DEBUG, INFO, WARNING, ERROR
+log_file: null  # Optional log file path
+log_format: human  # "json" or "human"
+
+# Debug artifacts
+enable_debug_artifacts: false  # Enable debug visualization
+debug_output_dir: debug_output  # Directory for debug artifacts
+generate_overlays: true  # Generate overlay images (when debug enabled)
+generate_html_report: true  # Generate HTML report (when debug enabled)
+
+# Concurrency settings
+worker_type: thread  # "sequential" or "thread"
+max_workers: null  # Auto-detect based on CPU cores
+
+

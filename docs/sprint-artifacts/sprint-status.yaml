@@ -1,0 +1,102 @@
+generated: "2025-11-16"
+project: "pdf-reading-project"
+selected_track: "bmm-standard"
+
+# IMPLEMENTATION STATUS DEFINITIONS:
+# - backlog: Identified but not yet drafted into a full story document
+# - drafted: Story document created with ACs and tasks, pending SM/PO review
+# - ready-for-dev: Approved story, ready for Dev agent (`dev-story`) implementation
+# - in-progress: Dev agent is actively implementing this story
+# - review: Implementation complete, awaiting code review / verification
+# - done: Story fully implemented, reviewed, and accepted
+
+development_status:
+  # Epic row (for grouping only; not used directly by dev-story)
+  epic-1:
+    title: "Vertical Slice Foundations"
+    status: "in-scope"
+
+  # Story rows (keys MUST match pattern: number-number-name)
+  1-1-project-scaffolding-and-core-models:
+    title: "Project scaffolding & core data models"
+    status: "done"
+
+  1-2-pdf-ingestion-and-page-rendering:
+    title: "PDF ingestion and page rendering"
+    status: "done"
+
+  1-3-minimal-table-detection-and-grid-construction:
+    title: "Minimal table detection and grid construction"
+    status: "done"
+
+  1-4-basic-cell-text-extraction-and-assembly:
+    title: "Basic cell text extraction and assembly"
+    status: "done"
+
+  1-5-end-to-end-pipeline-runner-and-demo:
+    title: "End-to-end pipeline runner & demo script"
+    status: "done"
+
+  2-0-geometric-line-detection:
+    title: "Geometric line detection and grid construction"
+    status: "review"
+
+  2-1-merged-cells-and-spans:
+    title: "Merged cells and span-aware grid structure"
+    status: "done"
+
+  2-2-span-aware-table-assembly:
+    title: "Span-aware table assembly for merged cells"
+    status: "done"
+
+  2-3-multi-page-support:
+    title: "Multi-page support in pipeline runner"
+    status: "done"
+
+  2-4-basic-error-handling:
+    title: "Basic error handling strategy"
+    status: "done"
+
+  2-5-llm-fallback-for-cell-extraction:
+    title: "LLM fallback for low-confidence cell extraction"
+    status: "done"
+
+  2-6-structured-logging-and-metrics:
+    title: "Structured logging and metrics"
+    status: "done"
+
+  2-7-debug-artifacts-and-visualization:
+    title: "Debug artifacts and visualization"
+    status: "done"
+
+  2-8-configuration-ergonomics-and-cli:
+    title: "Configuration ergonomics and CLI wrapper"
+    status: "done"
+
+  2-9-comprehensive-documentation:
+    title: "Comprehensive documentation"
+    status: "done"
+
+  3-1-parallel-processing-and-workload-scaling:
+    title: "Parallel processing and workload scaling"
+    status: "review"
+
+  3-2-advanced-table-types-and-irregular-structures:
+    title: "Advanced table types and irregular structures"
+    status: "review"
+
+  3-3-run-manifest-and-reproducibility-metadata:
+    title: "Run manifest and reproducibility metadata"
+    status: "review"
+
+  3-4-integration-adapters-and-service-wrapper:
+    title: "Integration adapters and service wrapper"
+    status: "review"
+
+  3-5-benchmark-suite-and-quality-gates:
+    title: "Benchmark suite and quality gates"
+    status: "review"
+
+  3-6-gemini-end-to-end-extraction:
+    title: "Gemini end-to-end extraction strategy"
+    status: "review"

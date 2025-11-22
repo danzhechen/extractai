@@ -1,0 +1,21 @@
+# Quality extraction for scanned PDFs (with consensus confidence)
+# Use when: Accuracy is priority, need confidence scores
+
+extraction_preset: smart
+extraction_strategy: llm_end_to_end
+
+# LLM settings - consensus voting for confidence
+llm_model: gemini-2.5-pro  # FREE
+llm_consistency_attempts: 3  # Run 3x and vote (enables confidence)
+llm_consistency_threshold: 0.8  # Require 80% agreement
+
+# Position verification - disabled for scanned PDFs
+enable_position_verification: false
+
+# Processing
+worker_type: sequential  # More stable for consensus
+max_workers: 1
+
+# Logging
+log_level: INFO
+

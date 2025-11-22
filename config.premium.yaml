@@ -1,0 +1,50 @@
+# Premium Preset Configuration (Best quality, PAID)
+# Uses Gemini 3.0 Pro always for maximum accuracy
+#
+# Cost: ~$1.25 per 1000 pages
+# Quality: Best possible (user-validated as "super good")
+# Usage: python -m pdf_reader extract --input document.pdf --config config.premium.yaml
+
+# Preset
+extraction_preset: premium  # PAID Gemini 3.0 Pro
+
+# Input/Output settings
+input_path: null  # Set via CLI --input argument
+# output_dir: null  # Optional output directory
+
+# Page selection
+# page_indices: null  # Process all pages (default)
+
+# Processing settings
+dpi: 200  # Can increase to 300 for critical documents
+
+# Extraction strategy (set by preset)
+extraction_strategy: llm_end_to_end  # LLM-first approach
+llm_provider: google  # Use Google Gemini
+llm_model: gemini-3.0-pro  # PAID premium model
+llm_model_escalation: null  # No escalation needed (already using best)
+enable_auto_escalation: false  # N/A (already on premium)
+
+# API key (set via environment variable for security)
+# llm_api_key: null  # Set PDF_READER_LLM_API_KEY env var instead
+
+# LLM consistency (optional, but recommended for critical docs)
+llm_consistency_attempts: 3  # Multiple attempts for higher confidence
+llm_consistency_threshold: 0.8  # Require 80% agreement
+
+# Logging configuration
+log_level: INFO  # DEBUG for detailed extraction logs
+log_file: null  # Optional: save logs to file
+log_format: human  # "json" or "human"
+
+# Debug artifacts (recommended for QA)
+enable_debug_artifacts: true  # Generate visual overlays
+debug_output_dir: debug_output
+generate_overlays: true
+generate_html_report: true
+
+# Concurrency settings
+worker_type: thread  # Parallel processing
+max_workers: null  # Auto-detect
+
+

@@ -1,0 +1,12 @@
+# Debug configuration file
+# Enables debug artifacts and verbose logging
+
+dpi: 200
+log_level: DEBUG
+enable_debug_artifacts: true
+debug_output_dir: debug_output
+generate_overlays: true
+generate_html_report: true
+
+
+

@@ -1,0 +1,86 @@
+# Quality gate thresholds for benchmark suite
+#
+# These thresholds define the minimum acceptable performance for the extraction
+# pipeline. If metrics fall below these thresholds, CI will fail.
+
+thresholds:
+  # Overall metrics
+  overall_f1:
+    target: 0.87  # Target: 87% overall F1
+    tolerance: 0.05  # Allow 5% regression (82% minimum)
+    description: "Harmonic mean of structural and text F1 scores"
+  
+  # Structural metrics
+  structural_f1:
+    target: 0.90  # Target: 90% structural F1
+    tolerance: 0.05  # Allow 5% regression (85% minimum)
+    description: "Accuracy of table structure detection (grid, spans)"
+  
+  avg_grid_shape_accuracy:
+    target: 0.90  # Target: 90% correct grid shapes
+    tolerance: 0.05
+    description: "Percentage of tables with correct row/column counts"
+  
+  avg_cell_iou:
+    target: 0.85  # Target: 85% average IoU for cell bounding boxes
+    tolerance: 0.05
+    description: "Average Intersection over Union for cell positions"
+  
+  avg_span_accuracy:
+    target: 0.85  # Target: 85% correct spans
+    tolerance: 0.05
+    description: "Percentage of cells with correct rowspan/colspan"
+  
+  # Text metrics
+  text_f1:
+    target: 0.85  # Target: 85% text F1
+    tolerance: 0.05  # Allow 5% regression (80% minimum)
+    description: "Accuracy of text extraction"
+  
+  avg_cer:
+    target: 0.15  # Target: 15% Character Error Rate (lower is better)
+    tolerance: 0.05  # Allow 5% increase (20% maximum)
+    inverted: true  # Lower is better
+    description: "Average Character Error Rate (lower is better)"
+  
+  exact_match_rate:
+    target: 0.70  # Target: 70% exact matches
+    tolerance: 0.05
+    description: "Percentage of cells with exact text match"
+  
+  # Detection metrics
+  table_detection_recall:
+    target: 0.95  # Target: 95% recall (find all tables)
+    tolerance: 0.05
+    description: "Percentage of ground truth tables detected"
+  
+  table_detection_precision:
+    target: 0.90  # Target: 90% precision (few false positives)
+    tolerance: 0.05
+    description: "Percentage of detected tables that are correct"
+
+# Benchmark subsets
+subsets:
+  smoke:
+    description: "Fast smoke test for quick validation"
+    pdfs: ["simple_table.pdf", "bordered_table.pdf", "merged_cells.pdf"]
+    timeout: 30  # seconds
+    required_for: "pull_request"
+  
+  full:
+    description: "Complete benchmark suite"
+    pdfs: "all"
+    timeout: 300  # seconds
+    required_for: "scheduled"
+
+# Alert configuration
+alerts:
+  # Notify if metrics regress beyond tolerance
+  slack_webhook: "${SLACK_WEBHOOK_URL}"  # Optional
+  email: "team@example.com"  # Optional
+  
+  # Create GitHub issue if full benchmark fails
+  create_issue_on_failure: true
+  issue_labels: ["benchmark", "regression", "bug"]
+
+

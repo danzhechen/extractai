@@ -1,0 +1,8 @@
+# Minimal configuration file
+# Only includes essential settings
+
+dpi: 200
+log_level: INFO
+
+
+
