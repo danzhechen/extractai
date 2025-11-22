@@ -3,7 +3,7 @@
 #
 # Cost: ~$1.25 per 1000 pages
 # Quality: Best possible (user-validated as "super good")
-# Usage: python -m pdf_reader extract --input document.pdf --config config.premium.yaml
+# Usage: python -m pdf_reader extract --input document.pdf --config config/premium.yaml
 
 # Preset
 extraction_preset: premium  # PAID Gemini 3.0 Pro

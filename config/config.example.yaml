@@ -2,9 +2,9 @@
 # Copy this file and customize as needed
 #
 # Quick Start Presets:
-# - config.smart.yaml: FREE Gemini 2.5 Pro (recommended)
-# - config.premium.yaml: PAID Gemini 3.0 Pro (best quality)
-# - config.offline.yaml: Heuristics only (no API, FREE)
+# - config/smart.yaml: FREE Gemini 2.5 Pro (recommended)
+# - config/premium.yaml: PAID Gemini 3.0 Pro (best quality)
+# - config/offline.yaml: Heuristics only (no API, FREE)
 
 # Extraction preset (quick config)
 extraction_preset: smart  # "smart" (FREE), "premium" (PAID), or "offline" (FREE)

@@ -3,7 +3,7 @@
 #
 # Cost: ~$0 for typical usage (escalation rare)
 # Quality: Excellent for 95%+ of tables
-# Usage: python -m pdf_reader extract --input document.pdf --config config.smart.yaml
+# Usage: python -m pdf_reader extract --input document.pdf --config config/smart.yaml
 
 # Preset (explicitly set for clarity)
 extraction_preset: smart  # FREE Gemini 2.5 Pro
