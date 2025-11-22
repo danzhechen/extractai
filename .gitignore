@@ -34,6 +34,17 @@ env/
 *~
 .DS_Store
 
+# BMad/Cursor workflow files (may contain sensitive info)
+.bmad/
+.cursor/
+.cursorrules
+*.bmad
+
+# Internal development/sprint artifacts
+docs/sprint-artifacts/
+*-status.yaml
+sprint-status.yaml
+
 # Testing
 .pytest_cache/
 .coverage
