@@ -34,16 +34,35 @@ env/
 *~
 .DS_Store
 
-# BMad/Cursor workflow files (may contain sensitive info)
+# BMad/Cursor/Claude workflow files (may contain sensitive info)
 .bmad/
 .cursor/
+.claude/
 .cursorrules
 *.bmad
+
+# MCP configuration files
+.mcp.json
+.mcp.env
+.mcp.env.example
 
 # Internal development/sprint artifacts
 docs/sprint-artifacts/
 *-status.yaml
 sprint-status.yaml
+docs/bmm-workflow-status.yaml
+
+# Runtime output directories
+runs/
+datasets/benchmarks/*.pdf
+datasets/benchmarks/*.xlsx
+datasets/benchmarks/*.csv
+
+# Mistakenly created files from CLI commands
+--input
+--output
+--debug
+--debug-output
 
 # Testing
 .pytest_cache/
