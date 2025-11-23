@@ -375,9 +375,33 @@ class GeminiEndToEndStrategy(PageExtractionStrategy):
                     page_result.llm_tokens_output += tokens_out
                     
                     log_with_context(logger, logging.DEBUG, f"Attempt {i+1} succeeded", page_index=page_index, tables_found=len(parsed_json.get("tables", [])))
+                    break  # Success! No need to retry
                 except Exception as e:
-                    log_with_context(logger, logging.WARNING, f"Attempt {i+1} failed: {e}", page_index=page_index, error_type=type(e).__name__)
+                    error_str = str(e)
+                    error_type = type(e).__name__
+                    
+                    # Check if error is retryable (500, 503, 429, timeout, or "internal error")
+                    is_retryable = (
+                        "500" in error_str or 
+                        "503" in error_str or 
+                        "429" in error_str or
+                        "internal error" in error_str.lower() or
+                        "timeout" in error_str.lower() or
+                        "deadline exceeded" in error_str.lower()
+                    )
+                    
+                    log_with_context(logger, logging.WARNING, f"Attempt {i+1} failed: {e}", page_index=page_index, error_type=error_type, retryable=is_retryable)
                     primary_failed = True
+                    
+                    # If retryable and not last attempt, wait before retrying
+                    if is_retryable and i < attempts - 1:
+                        wait_time = min(2 ** i, 10)  # Exponential backoff: 1s, 2s, 4s, max 10s
+                        log_with_context(logger, logging.INFO, f"Retrying in {wait_time}s (exponential backoff)", page_index=page_index)
+                        time.sleep(wait_time)
+                    elif not is_retryable:
+                        # Non-retryable error (e.g., 400, 401, 403) - don't retry
+                        log_with_context(logger, logging.ERROR, f"Non-retryable error, stopping attempts: {e}", page_index=page_index)
+                        break
 
             # Escalation logic: If primary model failed and escalation is enabled
             if not raw_results and config.enable_auto_escalation and config.llm_model_escalation:
@@ -414,7 +438,30 @@ class GeminiEndToEndStrategy(PageExtractionStrategy):
                         log_with_context(logger, logging.INFO, "Escalation succeeded", page_index=page_index)
                         break  # Success! No need to retry
                     except Exception as e:
-                        log_with_context(logger, logging.WARNING, f"Escalation attempt {i+1} failed: {e}", page_index=page_index)
+                        error_str = str(e)
+                        error_type = type(e).__name__
+                        
+                        # Check if error is retryable
+                        is_retryable = (
+                            "500" in error_str or 
+                            "503" in error_str or 
+                            "429" in error_str or
+                            "internal error" in error_str.lower() or
+                            "timeout" in error_str.lower() or
+                            "deadline exceeded" in error_str.lower()
+                        )
+                        
+                        log_with_context(logger, logging.WARNING, f"Escalation attempt {i+1} failed: {e}", page_index=page_index, error_type=error_type, retryable=is_retryable)
+                        
+                        # If retryable and not last attempt, wait before retrying
+                        if is_retryable and i < attempts - 1:
+                            wait_time = min(2 ** i, 10)  # Exponential backoff: 1s, 2s, 4s, max 10s
+                            log_with_context(logger, logging.INFO, f"Retrying escalation in {wait_time}s (exponential backoff)", page_index=page_index)
+                            time.sleep(wait_time)
+                        elif not is_retryable:
+                            # Non-retryable error - don't retry
+                            log_with_context(logger, logging.ERROR, f"Non-retryable error in escalation, stopping: {e}", page_index=page_index)
+                            break
 
             if not raw_results:
                 raise RuntimeError("All LLM attempts (primary + escalation) failed to return valid JSON")
