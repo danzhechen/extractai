@@ -50,13 +50,9 @@ jobs:
         run: |
           pip install --upgrade pip
           # Install package dependencies
-          pip install -r "${{ github.workspace }}/requirements.txt"
+          pip install -r requirements.txt
           # Install the package itself (editable mode)
           pip install -e .
-          # Install dev dependencies if file exists (optional)
-          if [ -f "${{ github.workspace }}/requirements-dev.txt" ]; then
-            pip install -r "${{ github.workspace }}/requirements-dev.txt"
-          fi
       
       - name: Run smoke benchmarks
         id: smoke_benchmarks
