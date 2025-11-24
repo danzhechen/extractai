@@ -133,7 +133,7 @@ Most real-world PDFs are scanned images. We provide optimized configs for this:
 python -m pdf_reader.cli extract \
   --input document.pdf \
   --output output.xlsx \
-  --config config/scanned_fast.yaml
+  --config config/config.scanned_fast.yaml
 ```
 
 - ⚡ **Fast**: Single LLM pass
@@ -145,7 +145,7 @@ python -m pdf_reader.cli extract \
 python -m pdf_reader.cli extract \
   --input document.pdf \
   --output output.xlsx \
-  --config config/scanned_quality.yaml
+  --config config/config.scanned_quality.yaml
 ```
 
 - 🎯 **Accurate**: 3x LLM attempts with voting

@@ -31,7 +31,7 @@ if [ "$MODE" = "quality" ]; then
     echo -e "  • Confidence: ✅ Enabled"
     echo -e "  • Speed: Slower (3x cost)"
     echo -e "  • Excel: Color-coded cells 🟢🟡🔴"
-    CONFIG="config/scanned_quality.yaml"
+    CONFIG="config/config.scanned_quality.yaml"
     WORKER_TYPE="sequential"
     LLM_ATTEMPTS="3"
 else
@@ -40,7 +40,7 @@ else
     echo -e "  • Confidence: ❌ Not available"
     echo -e "  • Speed: Faster (1x cost)"
     echo -e "  • Excel: No color coding"
-    CONFIG="config/scanned_fast.yaml"
+    CONFIG="config/config.scanned_fast.yaml"
     WORKER_TYPE="thread"
     LLM_ATTEMPTS="1"
 fi
