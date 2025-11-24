@@ -87,7 +87,7 @@ Examples:
   pdf-reader extract --input document.pdf --dpi 300 --debug
 
   # Use a config file
-  pdf-reader extract --input document.pdf --config config.yaml
+  pdf-reader extract --input document.pdf --config config/my_config.yaml
         """,
     )
 

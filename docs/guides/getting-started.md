@@ -93,7 +93,7 @@ This generates:
 
 ### Use a Config File
 
-1. Create a config file (`my_config.yaml`):
+1. Create a config file (`config/my_config.yaml`):
 
 ```yaml
 dpi: 300
@@ -104,7 +104,7 @@ enable_debug_artifacts: true
 2. Use it:
 
 ```bash
-python -m pdf_reader extract --input document.pdf --config my_config.yaml
+python -m pdf_reader extract --input document.pdf --config config/my_config.yaml
 ```
 
 ### Enable LLM Fallback

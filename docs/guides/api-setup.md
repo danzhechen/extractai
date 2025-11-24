@@ -59,7 +59,7 @@ If you prefer using OpenAI's GPT-4o instead of Gemini:
 
 You can also set the API key in a config file (less secure, not recommended for production):
 
-**Create `config.yaml`**:
+**Create `config/my_config.yaml`**:
 ```yaml
 # API Configuration
 llm_api_key: "YOUR_API_KEY_HERE"
@@ -74,10 +74,10 @@ enable_debug_artifacts: false
 
 **Use with CLI**:
 ```bash
-python -m pdf_reader extract --input document.pdf --config config.yaml
+python -m pdf_reader extract --input document.pdf --config config/my_config.yaml
 ```
 
-⚠️ **Security Warning**: Never commit config files with API keys to version control! Add `config.yaml` to your `.gitignore`.
+⚠️ **Security Warning**: Never commit config files with API keys to version control! Add `config/*.local.yaml` to your `.gitignore`.
 
 ---
 

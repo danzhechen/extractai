@@ -31,7 +31,7 @@ See `python -m pdf_reader extract --help` for all available options.
 
 Create a YAML or JSON config file:
 
-**YAML Example** (`config.yaml`):
+**YAML Example** (`config/my_config.yaml`):
 ```yaml
 dpi: 300
 log_level: DEBUG
@@ -52,7 +52,7 @@ llm_fallback_enabled: false
 
 Use the config file:
 ```bash
-python -m pdf_reader extract --input document.pdf --config config.yaml
+python -m pdf_reader extract --input document.pdf --config config/my_config.yaml
 ```
 
 ### 3. Environment Variables
@@ -72,7 +72,7 @@ python -m pdf_reader extract --input document.pdf
 - `PDF_READER_LLM_API_KEY` - LLM API key (recommended for security)
 - `PDF_READER_LLM_FALLBACK_ENABLED` - Enable LLM fallback (true/false)
 - `PDF_READER_ENABLE_DEBUG_ARTIFACTS` - Enable debug artifacts (true/false)
-- And more (see `config.example.yaml` for full list)
+- And more (see `config/example.yaml` for full list)
 
 ### 4. Programmatic Configuration
 
@@ -95,7 +95,7 @@ Or load from a config file:
 from pdf_reader.config_loader import create_config
 from pathlib import Path
 
-config = create_config(config_file=Path("config.yaml"))
+config = create_config(config_file=Path("config/my_config.yaml"))
 ```
 
 ## Configuration Options
@@ -174,7 +174,7 @@ Line detection uses computer vision to identify actual table borders and grid li
 ### Minimal Configuration
 
 ```yaml
-# config.minimal.yaml
+# config/minimal.yaml
 dpi: 200
 log_level: INFO
 ```
@@ -182,7 +182,7 @@ log_level: INFO
 ### Debug Configuration
 
 ```yaml
-# config.debug.yaml
+# config/debug.yaml
 dpi: 200
 log_level: DEBUG
 enable_debug_artifacts: true
@@ -194,7 +194,7 @@ generate_html_report: true
 ### Production Configuration
 
 ```yaml
-# config.production.yaml
+# config/production.yaml
 dpi: 200
 log_level: WARNING
 enable_debug_artifacts: false
@@ -263,9 +263,9 @@ When multiple sources provide the same setting, the priority order determines wh
 
 ## See Also
 
-- `config.example.yaml` - Full example with all options
-- `config.minimal.yaml` - Minimal configuration
-- `config.debug.yaml` - Debug configuration
+- `config/example.yaml` - Full example with all options
+- `config/minimal.yaml` - Minimal configuration
+- `config/debug.yaml` - Debug configuration
 - [Architecture Documentation](../architecture.md) - System design details
 
 

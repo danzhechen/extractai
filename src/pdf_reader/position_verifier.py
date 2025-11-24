@@ -298,6 +298,18 @@ class PositionVerifier:
         ocr_text = " ".join(token.text for token in tokens).strip()
         cell_value = str(cell_value).strip()
         
+        # Normalize empty/placeholder values for comparison
+        # Common placeholders: "", "..", "-", "N/A", "—"
+        normalized_cell = cell_value.lower() if cell_value else ""
+        normalized_ocr = ocr_text.lower() if ocr_text else ""
+        
+        # Check if both are empty/placeholder (valid match)
+        empty_placeholders = {"", "..", "-", "n/a", "—", "na", "n.a."}
+        is_both_empty = (
+            (not cell_value or normalized_cell in empty_placeholders) and
+            (not ocr_text or normalized_ocr in empty_placeholders)
+        )
+        
         # Check for exact match
         is_exact_match = (cell_value == ocr_text)
         
@@ -311,10 +323,21 @@ class PositionVerifier:
             is_fuzzy_match = (similarity_score >= self.fuzzy_match_threshold)
         
         # Determine position confidence
-        if not tokens:
-            # No OCR tokens found in this cell - low confidence
-            position_confidence = 0.3
-            is_position_match = False
+        if is_both_empty:
+            # Both empty/placeholder - valid match (consistent across runs)
+            position_confidence = 1.0
+            is_position_match = True
+            is_exact_match = True  # Treat as exact match for consistency
+        elif not tokens:
+            # No OCR tokens found, but cell has value - could be valid (OCR missed it)
+            # If cell is also empty/placeholder, treat as match (handled above)
+            if not cell_value or normalized_cell in empty_placeholders:
+                position_confidence = 1.0  # Both empty - valid
+                is_position_match = True
+            else:
+                # OCR found nothing but LLM extracted something - medium confidence
+                position_confidence = 0.5
+                is_position_match = False
         elif is_exact_match:
             # Exact match - high confidence
             position_confidence = 1.0

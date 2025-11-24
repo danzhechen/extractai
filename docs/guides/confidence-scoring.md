@@ -88,7 +88,7 @@ combined_confidence = (consensus_confidence + position_confidence) / 2.0
 ### Enable/Disable Position Verification
 
 ```yaml
-# config.yaml
+# config/my_config.yaml
 enable_position_verification: true  # Default: true
 position_verification_threshold: 0.7  # Warn below this threshold
 ```

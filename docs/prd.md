@@ -515,7 +515,7 @@ This roadmap translates the product goals and architecture into concrete, engine
   - Lightweight HTML report per run that surfaces a few representative tables.
 - **T4.3:** Improve configuration ergonomics:
   - Central config object/type with sensible defaults.
-  - CLI wrapper (e.g., `pdf-reader extract --input file.pdf --config config.yaml`).
+  - CLI wrapper (e.g., `pdf-reader extract --input file.pdf --config config/my_config.yaml`).
 - **T4.4:** Documentation:
   - Developer-facing docs for architecture, key interfaces, and examples.
 

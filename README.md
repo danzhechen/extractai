@@ -233,7 +233,7 @@ for table, metadata in zip(result.tables, result.metadata):
 Create custom configs for your workflow:
 
 ```yaml
-# my_config.yaml
+# config/my_config.yaml
 extraction_preset: smart
 llm_model: gemini-2.5-pro
 llm_consistency_attempts: 3  # Consensus voting
@@ -249,7 +249,7 @@ Then use it:
 python -m pdf_reader.cli extract \
   --input document.pdf \
   --output tables.xlsx \
-  --config my_config.yaml
+  --config config/my_config.yaml
 ```
 
 ---

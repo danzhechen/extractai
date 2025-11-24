@@ -82,6 +82,7 @@ config.local.yaml
 # Output files (don't commit extraction results)
 output/
 debug_output/
+demo_output/
 *.xlsx
 *.csv
 sample_output/
@@ -92,9 +93,11 @@ sample_output/
 *.swp
 *~
 
-# Cleanup scripts (internal use only)
+# Cleanup scripts and demo scripts (internal use only)
 cleanup_for_github.sh
 *cleanup*.sh
+demo.sh
+*demo*.sh
 
 # Project-specific
 *.pdf

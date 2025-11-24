@@ -104,7 +104,7 @@ export PDF_READER_LLM_API_KEY=sk-...
 
 **Config file**:
 ```yaml
-# config.yaml
+# config/my_config.yaml
 llm_api_key: sk-...
 ```
 
